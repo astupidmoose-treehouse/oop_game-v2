@@ -9,14 +9,12 @@ class Phrase {
 
 	addPhraseToDisplay() {
 		const phraseElement = document.querySelector("#phrase ul");
-        const splitString = this.phrase.split("");
-		splitString.forEach(function(e) {
-			if (e === " ") {
-                phraseElement.appendChild(document.createElement("li")).classList.add("space");
-                // phraseElement.append('<li class="space"> </li>');
+		const splitString = this.phrase.split("");
+		splitString.forEach(letter => {
+			if (letter === " "){
+				phraseElement.appendChild(document.createElement("li")).classList.add("space");
 			} else {
-                phraseElement.appendChild(document.createElement("li")).classList.add("hide","letter",e);
-                //phraseElement.append('<li class="hide letter ' + e + '">' + e + '</li>');
+				phraseElement.appendChild(document.createElement("li")).classList.add("hide","letter", letter);
 			}
 		});
     }

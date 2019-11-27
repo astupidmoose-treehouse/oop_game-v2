@@ -40,12 +40,11 @@ class Game {
 		const randomNumber = Math.floor(Math.random() * this.phrases.length);
 		const usePhrase = this.phrases[randomNumber];
 		return usePhrase;
-    }
-    
-    startGame(){
-        document.getElementById('overlay').style.display = 'none';
-        this.activePhrase = this.getRandomPhrase();
-        this.activePhrase.addPhraseToDisplay();
-    }
+	}
 
+	startGame() {
+		document.getElementById("overlay").style.display = "none";
+		this.activePhrase = this.getRandomPhrase();
+		this.activePhrase.addPhraseToDisplay();
+	}
 }
