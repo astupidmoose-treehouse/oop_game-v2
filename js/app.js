@@ -36,10 +36,11 @@
 // game.startGame();
 // console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
 
-var game;
+let game;
 document.getElementById("btn__reset").addEventListener("click", function(){
 	game = new Game();
 	game.startGame();
 });
 
 // Part II
+
