@@ -22,15 +22,18 @@ class Game {
 			// new Phrase(
 			// 	"lost coins only make everyone else's coins worth slightly more.  Think of it as a donation to everyone."
 			// ),
-			new Phrase("You should never delete a wallet."),
+			// new Phrase("You should never delete a wallet."),
 			// new Phrase(
 			// 	"for greater privacy, it's best to use bitcoin addresses only once."
 			// ),
 			// new Phrase(
 			// 	"nodes are not going to accept an invalid transaction as payment, and honest nodes will never accept a block containing them."
 			// ),
+			// new Phrase(
+			// 	"Bitcoin isn't currently practical for very small micropayments."
+			// ),
 			new Phrase(
-				"Bitcoin isn't currently practical for very small micropayments."
+				"aaa"
 			)
 		];
 		return this.phrases;
@@ -53,12 +56,15 @@ class Game {
 	 * @return {boolean} True if game has been won, false if game wasn't won 
 	*/
 	checkForWin() {
-		// let stillLetters = document.querySelectorAll('hide');
-		// if (stillLetters){
-		// 	return false;
-		// } else {
-		// 	return true;
-		// }
+		// crete a Nodelist of list items with the class hide present
+		let stillLetters = document.querySelectorAll('[class~=hide]');
+		// if the Nodelist returns 1 or more results, game isn't won, return false
+		if (stillLetters.length > 0){
+			return false;
+		// if the result is 0, we win the game, return true.
+		} else {
+			return true;
+		}
 	};
 	
 	/** 

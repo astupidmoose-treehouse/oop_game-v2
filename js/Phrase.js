@@ -12,7 +12,7 @@ class Phrase {
 		const phraseElement = document.querySelector("#phrase ul");
 		const splitString = this.phrase.split("");
 		splitString.forEach(letter => {
-			if (letter === " " || letter === "." || letter === ".") {
+			if (letter === " " || letter === "." || letter === "'") {
 				phraseElement
 					.appendChild(document.createElement("li"))
 					.classList.add("space");
