@@ -16,39 +16,63 @@ class Game {
 
 	createPhrases() {
 		this.phrases = [
-			// new Phrase(
-			// 	"if you don't believe it or don't get it, I don't have the time to try to convince you, sorry."
-			// ),
-			// new Phrase(
-			// 	"lost coins only make everyone else's coins worth slightly more.  Think of it as a donation to everyone."
-			// ),
-			// new Phrase("You should never delete a wallet."),
-			// new Phrase(
-			// 	"for greater privacy, it's best to use bitcoin addresses only once."
-			// ),
-			// new Phrase(
-			// 	"nodes are not going to accept an invalid transaction as payment, and honest nodes will never accept a block containing them."
-			// ),
-			// new Phrase(
-			// 	"Bitcoin isn't currently practical for very small micropayments."
-			// ),
 			new Phrase(
-				"aaa"
+			 	"if you don't believe it or don't get it, I don't have the time to try to convince you, sorry."
+			),
+			new Phrase(
+				"lost coins only make everyone else's coins worth slightly more.  Think of it as a donation to everyone."
+			),
+			new Phrase("You should never delete a wallet."),
+			new Phrase(
+				"for greater privacy, it's best to use bitcoin addresses only once."
+			),
+			new Phrase(
+				"nodes are not going to accept an invalid transaction as payment, and honest nodes will never accept a block containing them."
+			),
+			new Phrase(
+				"Bitcoin isn't currently practical for very small micropayments."
 			)
 		];
 		return this.phrases;
 	}
 
 	getRandomPhrase() {
+		// pick a random number based on the number of phrase objects.
 		const randomNumber = Math.floor(Math.random() * this.phrases.length);
+		// use a phrase based on the random number and return it. 
 		const usePhrase = this.phrases[randomNumber];
 		return usePhrase;
 	}
 
 	startGame() {
+		// hide the overlay, you should now see sthe gameboard. 
 		document.getElementById("overlay").style.display = "none";
+
+		// remove any existing phrases to ensure the next round is clean
+		document.querySelectorAll("#phrase ul li").forEach(phrase => {
+			phrase.parentNode.removeChild(phrase);
+		})		
+
+		// reset all the keys by enabling them, and restoring class to key
+		document.querySelectorAll(".key").forEach(key => {
+			key.disabled = false;
+			key.classList = "key";
+		})
+
+		// find all the lost hearts and turn them back to live hears. 
+		document.querySelectorAll(".tries img[src~='images/lostHeart.png'").forEach(image =>{
+			image.src = "images/liveHeart.png";
+		})
+
+		// set the active phrase to a random one
 		this.activePhrase = this.getRandomPhrase();
+		// display the active phrase
 		this.activePhrase.addPhraseToDisplay();
+
+		console.log(this.activePhrase.phrase);
+
+		
+
 	}
 
 	/** 
@@ -72,15 +96,53 @@ class Game {
 	* Removes a life from the scoreboard 
 	* Checks if player has remaining lives and ends game if player is out 
 	*/
-	removeLife() {};
+	removeLife() {
+		this.missed += 1;
+		console.log(this.missed);
+		let tries = document.querySelectorAll(".tries img[src~='images/liveHeart.png'");
+		tries[0].src = "images/lostHeart.png";
+		if (this.missed >= 5){
+			this.gameOver(false);
+		}
+	};
 	
 	/**
 	 * Displays game over message
 	 * @param {boolean} gameWon - Whether or not the user won the game
 	 */
-	gameOver(gameWon) {};
+	gameOver(gameWon) {
+		let overlay = document.getElementById("overlay");
+		if (gameWon === true){
+			overlay.style.display = "flex";
+			overlay.classList = "win";
+			document.getElementById("game-over-message").innerHTML = "<p>Great Job!</p><p>The phrase was:</p><p>" + this.activePhrase.phrase + "</p>";
+		} else {
+			overlay.style.display = "flex";
+			overlay.classList = "lose";
+			document.getElementById("game-over-message").innerText = "Sorry, better luck next time!";
+		}
+		
+	};
 
-	handleInteraction(){
+	handleInteraction(button){
+
+		// assign the letter text from the button to a variable. 
+		let letterToCheck = button.innerText;
+
+		// set the clicked button to disabled
+		button.disabled = true;
+
+		// call the check letter method from the active phrase. If its true, there was a match
+		if (this.activePhrase.checkLetter(letterToCheck) === true){
+			button.classList.add("chosen");
+			this.activePhrase.showMatchedLetter(letterToCheck);
+			if(this.checkForWin() === true){
+				this.gameOver(true);
+			}
+		} else {
+			button.classList.add("wrong");
+			this.removeLife();
+		}		
 
 	}
 }

@@ -202,3 +202,59 @@ button {
 .lose a {
   color: var(--color-lose);
 }
+
+
+
+/* Custom CSS  
+*/
+.space {
+  color: #fff;
+  background-color: #fff;
+  font-size: 20px;
+  height: 65px;
+  width: 15px;
+  padding: 20px 1px 0 1px;
+  margin-right: 2px;
+  border-radius: 5px;
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+}
+
+.period {
+  color: #000;
+  background-color: #fff;
+  font-size: 20px;
+  height: 65px;
+  width: 15px;
+  padding: 20px 1px 0 1px;
+  margin-right: 2px;
+  border-radius: 5px;
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+}
+
+.apostrophe {
+  color: #000;
+  background-color: #fff;
+  font-size: 20px;
+  height: 65px;
+  width: 15px;
+  padding: 20px 1px 0 1px;
+  margin-right: 2px;
+  border-radius: 5px;
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;}
+
+.comma {
+  color: #000;
+  background-color: #fff;
+  font-size: 20px;
+  height: 65px;
+  width: 15px;
+  padding: 20px 1px 0 1px;
+  margin-right: 2px;
+  border-radius: 5px;
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+}
+

@@ -12,10 +12,34 @@ class Phrase {
 		const phraseElement = document.querySelector("#phrase ul");
 		const splitString = this.phrase.split("");
 		splitString.forEach(letter => {
-			if (letter === " " || letter === "." || letter === "'") {
+			if (letter === " ") {
+				var li = document.createElement("li");
 				phraseElement
-					.appendChild(document.createElement("li"))
-					.classList.add("space");
+					.appendChild(li)
+					.classList.add("space", "letter", "show");
+				phraseElement
+					.appendChild(li).innerText = " ";
+			} else if (letter === ".") {
+				var li = document.createElement("li");
+				phraseElement
+					.appendChild(li)
+					.classList.add("period", "letter", "show");
+				phraseElement
+					.appendChild(li).innerText = ".";
+			} else if (letter === "'") {
+				var li = document.createElement("li");
+				phraseElement
+					.appendChild(li)
+					.classList.add("apostrophe", "letter", "show");
+				phraseElement
+					.appendChild(li).innerText = "'";
+			} else if (letter === ",") {
+				var li = document.createElement("li");
+				phraseElement
+					.appendChild(li)
+					.classList.add("comma", "letter", "show");
+				phraseElement
+					.appendChild(li).innerText = ",";
 			} else {
 				phraseElement
 					.appendChild(document.createElement("li"))
@@ -24,24 +48,28 @@ class Phrase {
 		});
 	}
 
-	/** * Checks if passed letter is in phrase * @param (string) letter - Letter to check */ checkLetter(letter) {
-		if (this.phrase.includes(letter)){
+	/** * Checks if passed letter is in phrase * @param (string) letter - Letter to check */
+
+	checkLetter(letter) {
+		// create a Regular expression, to match input in a case insensitive manner
+		let rx = new RegExp(letter, "i");
+
+		if (this.phrase.match(rx)) {
 			return true;
 		}
 	}
 
-	/** 
-	 * Displays passed letter on screen after a match is found 
-	 * @param (string) letter - Letter to display 
-	*/
+	/**
+	 * Displays passed letter on screen after a match is found
+	 * @param (string) letter - Letter to display
+	 */
 	showMatchedLetter(letter) {
-
 		// create a Regular expression, to match input in a case insensitive manner
-		var rx = new RegExp (letter, "i");
+		let rx = new RegExp(letter, "i");
 
 		// if the phrase has a match of the regex(input case-insensitive)
-		if (this.phrase.match(rx)){
-			// select all elements with a class equal to the letter, again case insensitive. 
+		if (this.phrase.match(rx)) {
+			// select all elements with a class equal to the letter, again case insensitive.
 			let results = document.querySelectorAll("[class~='" + letter + "' i]");
 			// cycle through the results
 			results.forEach(result => {
@@ -51,9 +79,9 @@ class Phrase {
 				const properLetter = result.classList.value;
 				// add the "show" and "letter" classes back to the element
 				result.classList.add("show", "letter");
-				// insert the letter as text. Since we are using the case sensitive variable, it will show the correct case upon being selected. 
+				// insert the letter as text. Since we are using the case sensitive variable, it will show the correct case upon being selected.
 				result.innerHTML = properLetter;
-			})
+			});
 			return true;
 		}
 	}
