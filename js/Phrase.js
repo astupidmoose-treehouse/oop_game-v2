@@ -41,8 +41,10 @@ class Phrase {
 				phraseElement
 					.appendChild(li).innerText = ",";
 			} else {
+				var li = document.createElement("li");
+				li.textContent = letter;
 				phraseElement
-					.appendChild(document.createElement("li"))
+					.appendChild(li)
 					.classList.add("hide", "letter", letter);
 			}
 		});
@@ -75,12 +77,8 @@ class Phrase {
 			results.forEach(result => {
 				// for each result, remove all classes except the letter, so we can extract that class
 				result.classList.remove("hide", "letter", "show");
-				// set a new variable from the letter class, we will use this to ensure we keep the case of the letter
-				const properLetter = result.classList.value;
 				// add the "show" and "letter" classes back to the element
 				result.classList.add("show", "letter");
-				// insert the letter as text. Since we are using the case sensitive variable, it will show the correct case upon being selected.
-				result.innerHTML = properLetter;
 			});
 			return true;
 		}
